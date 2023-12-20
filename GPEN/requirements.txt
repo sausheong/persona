@@ -1,0 +1,8 @@
+ninja
+torch
+torchvision
+opencv-python
+numpy
+scikit-image
+pillow
+pyyaml==5.4.1

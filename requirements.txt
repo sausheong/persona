@@ -1,4 +1,4 @@
-ibrosa
+librosa
 numpy
 opencv-contrib-python
 opencv-python
@@ -16,3 +16,9 @@ yapf
 imageio[ffmpeg]
 batch-face
 gdown
+openai
+diffusers
+pathos
+transformers
+accelerate
+mutagen

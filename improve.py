@@ -6,8 +6,37 @@ import numpy as np
 import os
 from basicsr.utils import imwrite
 from pathos.pools import ParallelPool
+import subprocess
+import platform
+from mutagen.mp3 import MP3
 
 from gfpgan import GFPGANer
+
+def vid2frames(vidPath, framesOutPath):
+    vidcap = cv2.VideoCapture(vidPath)
+    success,image = vidcap.read()
+    frame = 1
+    while success:
+      cv2.imwrite(framesOutPath + str(frame).zfill(5) + '.png', image)
+      success,image = vidcap.read()
+      frame += 1
+
+def restore_frames(vidOutPath):
+    no_of_frames = count_files("temp/improve/gfpgan_results/restored_faces/")
+    mp3_duration = get_mp3_duration("temp/tmp.mp3")
+    framesPath = "temp/improve/gfpgan_results/restored_faces/frames%5d.png"
+    fps = no_of_frames/mp3_duration
+    command = f"ffmpeg -y -r {fps} -f image2 -i {framesPath} -i {audiofile} -vcodec mpeg4 -b:v 20000k {vidOutPath}"
+    subprocess.call(command, shell=platform.system() != 'Windows')
+
+def get_mp3_duration(mp3Path):
+    audio = MP3(mp3Path)
+    duration = audio.info.length
+    return duration    
+
+def count_files(directory):
+    return len([name for name in os.listdir(directory) if os.path.isfile(os.path.join(directory, name))])
+
 
 def process(img_path):
     only_center_face=True
