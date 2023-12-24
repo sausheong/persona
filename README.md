@@ -11,9 +11,10 @@ Assembles the following libraries to create digital avatars:
 
 # Examples
 
-[![Santa Claus Christmas Greeting](https://img.youtube.com/vi/wrOL76aNf7M/hqdefault.jpg)](https://youtube.com/shorts/wrOL76aNf7M)
-
-
-
+## Santa Claus Christmas Greetings
 https://github.com/sausheong/persona/assets/5962/2d60798f-e877-46b1-90a0-afa864dab50e
+
+## NORAD Tracking Santa
+https://github.com/sausheong/persona/assets/5962/c400edfd-7316-4d07-998f-9b94bf5c64af
+
 
