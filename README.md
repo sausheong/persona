@@ -13,3 +13,7 @@ Assembles the following libraries to create digital avatars:
 
 [![Santa Claus Christmas Greeting](https://img.youtube.com/vi/wrOL76aNf7M/hqdefault.jpg)](https://youtube.com/shorts/wrOL76aNf7M)
 
+
+
+https://github.com/sausheong/persona/assets/5962/2d60798f-e877-46b1-90a0-afa864dab50e
+
