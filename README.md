@@ -11,5 +11,5 @@ Assembles the following libraries to create digital avatars:
 
 # Examples
 
-[![Santa Claus Christmas Greetings](https://youtube.com/shorts/wrOL76aNf7M)
+[![Santa Claus Christmas Greetings]](https://youtube.com/shorts/wrOL76aNf7M)
 
