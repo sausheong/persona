@@ -1,5 +1,4 @@
 from config import *
-from improve import improve_faces
 import os
 import numpy as np
 import cv2, audio
@@ -129,16 +128,22 @@ def load_model(path):
 	model = model.to(device)
 	return model.eval()
 
-def modify_lips():
-	if not os.path.isfile(sourcefile):
+def modify_lips(path_id, audiofile, animatedfile, outfile):
+	animatedfilePath = os.path.join("temp", path_id, animatedfile)
+	audiofilePath = os.path.join("temp", path_id, audiofile)
+	outfilePath = os.path.join("temp", path_id, outfile)
+	tempAudioPath = os.path.join("temp", path_id, "temp.wav")
+	tempVideoPath  = os.path.join("temp", path_id, "temp.avi")
+
+	if not os.path.isfile(animatedfilePath):
 		raise ValueError('--face argument must be a valid path to video/image file')
 
-	elif sourcefile.split('.')[1] in ['jpg', 'png', 'jpeg']:
-		full_frames = [cv2.imread(sourcefile)]
+	elif animatedfilePath.split('.')[1] in ['jpg', 'png', 'jpeg']:
+		full_frames = [cv2.imread(animatedfilePath)]
 		fps = fps
 
 	else:
-		video_stream = cv2.VideoCapture(sourcefile)
+		video_stream = cv2.VideoCapture(animatedfilePath)
 		fps = video_stream.get(cv2.CAP_PROP_FPS)
 
 		print('Reading video frames...')
@@ -166,11 +171,11 @@ def modify_lips():
 	print ("Number of frames available for inference: "+str(len(full_frames)))
 
 	print('Extracting raw audio...')
-	command = 'ffmpeg -y -i {} -strict -2 {}'.format(audiofile, 'temp/temp.wav')
+	command = 'ffmpeg -y -i {} -strict -2 {}'.format(audiofilePath, tempAudioPath)
 	subprocess.call(command, shell=True)
-	tmp_audiofile = 'temp/temp.wav'
+	
 
-	wav = audio.load_wav(tmp_audiofile, 16000)
+	wav = audio.load_wav(tempAudioPath, 16000)
 	mel = audio.melspectrogram(wav)
 	print(mel.shape)
 
@@ -201,7 +206,7 @@ def modify_lips():
 			print ("Model loaded")
 
 			frame_h, frame_w = full_frames[0].shape[:-1]
-			out = cv2.VideoWriter('temp/result.avi', cv2.VideoWriter_fourcc(*'DIVX'), fps, (frame_w, frame_h))
+			out = cv2.VideoWriter(tempVideoPath, cv2.VideoWriter_fourcc(*'DIVX'), fps, (frame_w, frame_h))
 
 		img_batch = torch.FloatTensor(np.transpose(img_batch, (0, 3, 1, 2))).to(device)
 		mel_batch = torch.FloatTensor(np.transpose(mel_batch, (0, 3, 1, 2))).to(device)
@@ -220,22 +225,7 @@ def modify_lips():
 
 	out.release()
 
-	command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(tmp_audiofile, 'temp/result.avi', outfile)
-	subprocess.call(command, shell=platform.system() != 'Windows')
-
-
-def vid2frames(vidPath, framesOutPath):
-    vidcap = cv2.VideoCapture(vidPath)
-    success,image = vidcap.read()
-    frame = 1
-    while success:
-      cv2.imwrite(framesOutPath + str(frame).zfill(5) + '.png', image)
-      success,image = vidcap.read()
-      frame += 1
-
-def restore_frames(vidOutPath):
-	framesPath = "temp/improve/gfpgan_results/restored_faces/frames%5d.png"
-	command = f"ffmpeg -y -r {fps} -f image2 -i {framesPath} -i {audiofile} -vcodec mpeg4 -b:v 20000k {vidOutPath}"
+	command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(tempAudioPath, tempVideoPath, outfilePath)
 	subprocess.call(command, shell=platform.system() != 'Windows')
 
 

@@ -6,6 +6,9 @@ import imageio
 import numpy as np
 import torch
 import torch.nn.functional as F
+import subprocess, platform
+from mutagen.wave import WAVE
+from datetime import timedelta
 
 from face_vid2vid.sync_batchnorm.replicate import DataParallelWithCallback
 from face_vid2vid.modules.generator import OcclusionAwareSPADEGenerator
@@ -335,13 +338,32 @@ class FaceAnimationClass:
             return self.blank_frame, self.base_frame
 
 
-def animate_face():
+def get_audio_duration(audioPath):
+    audio = WAVE(audioPath)
+    duration = audio.info.length
+    return duration   
+
+def seconds_to_hms(seconds):
+    seconds = int(seconds) + 1
+    hms = str(timedelta(seconds=seconds))
+    hms = hms.split(":")
+    hms = [f"0{h}" if len(h) == 1 else h for h in hms]
+    return ":".join(hms)
+
+def animate_face(path_id, audiofile, driverfile, imgfile, animatedfile):
     from tqdm import tqdm
     import time
-    faceanimation = FaceAnimationClass(source_image_path="temp/tmp.png", use_sr=False)
+    faceanimation = FaceAnimationClass(source_image_path=os.path.join("temp", path_id, imgfile), use_sr=False)
 
-    video_path = "temp/driver.mp4"
-    capture = cv2.VideoCapture(video_path)
+    tmpfile = f"temp/{path_id}/tmp.mp4"
+    duration = get_audio_duration(os.path.join("temp", path_id, audiofile))
+    print("duration of audio:", duration)
+    hms = seconds_to_hms(duration)
+    print("converted into hms:", hms)
+    command = f"ffmpeg -ss 00:00:00 -i {driverfile} -to {hms} -c copy {tmpfile}"
+    subprocess.call(command, shell=platform.system() != 'Windows')
+
+    capture = cv2.VideoCapture(tmpfile)
     fps = capture.get(cv2.CAP_PROP_FPS)
     frames = []
     _, frame = capture.read()
@@ -358,7 +380,8 @@ def animate_face():
         output_frames.append(result)
     time_end = time.time()
     print("Time cost: %.2f" % (time_end - time_start), "FPS: %.2f" % (len(frames) / (time_end - time_start)))
-    writer = imageio.get_writer("temp/source.mp4", fps=fps, quality=9, macro_block_size=1, codec="libx264", pixelformat="yuv420p")
+    writer = imageio.get_writer(os.path.join("temp", path_id, animatedfile), fps=fps, quality=9, macro_block_size=1, 
+                                codec="libx264", pixelformat="yuv420p")
     for frame in output_frames:
         writer.append_data(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
         # writer.append_data(frame)

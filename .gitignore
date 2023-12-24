@@ -1,5 +1,8 @@
 *.pth
-*.mp4
-*.mp3
+*.avi
 *.png
+__pycache__
 __pycache__/*
+.DS_Store
+temp/*
+*.lock

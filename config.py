@@ -1,10 +1,14 @@
 import torch
+import time
+import os
 
+path_id = ""
 checkpoint_path="checkpoints/wav2lip_gan.pth"
-outfile="temp/lips.mp4"
-audiofile="temp/tmp.mp3"
-imgfile="temp/tmp.png"
-sourcefile="temp/source.mp4"
+outfile="out.mp4"
+audiofile="tmp.wav"
+imgfile="avatar.png"
+driverfile="assets/driver06.mp4"
+animatedfile="animated.mp4"
 static=False
 fps=25
 pads=[0, 10, 0, 0]
@@ -20,5 +24,13 @@ mel_step_size = 16
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print('Using {} for inference.'.format(device))
 
-improve_input="temp/improve/framesout"
-improve_output="temp/improve/gfpgan_results"
+import warnings
+warnings.filterwarnings('ignore')
+
+def init_path_id():    
+    path_id = str(int(time.time()))
+    path = os.path.join("temp", path_id)
+    os.makedirs(path, exist_ok=True)
+    return path_id, path
+
+
