@@ -9,4 +9,7 @@ Assembles the following libraries to create digital avatars:
 4. [Wav2Lip](https://github.com/Rudrabha/Wav2Lip) - using speech to generate lip movement and superimposing it on the animated face
 5. [Real ESRGAN](https://github.com/ai-forever/Real-ESRGAN) - improving the image and scaling it
 
-<video src='assets/christmas.mp4' width=256/> | <video src='assets/norad.mp4' width=256/>
+# Examples
+
+[![Santa Claus Christmas Greetings](https://youtube.com/shorts/wrOL76aNf7M)
+
