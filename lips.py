@@ -1,12 +1,12 @@
 from config import *
 import os
 import numpy as np
-import cv2, audio
+import cv2, wav2lip.audio
 import subprocess
 from tqdm import tqdm
 import glob
-import torch, face_detection
-from models import Wav2Lip
+import torch, wav2lip.face_detection
+from wav2lip.models import Wav2Lip
 import platform
 
 
@@ -20,7 +20,7 @@ def get_smoothened_boxes(boxes, T):
 	return boxes
 
 def face_detect(images):
-	detector = face_detection.FaceAlignment(face_detection.LandmarksType._2D, flip_input=False, device=device)
+	detector = wav2lip.face_detection.FaceAlignment(wav2lip.face_detection.LandmarksType._2D, flip_input=False, device=device)
 	batch_size = face_det_batch_size
 	
 	while 1:
@@ -128,10 +128,9 @@ def load_model(path):
 	model = model.to(device)
 	return model.eval()
 
-def modify_lips(path_id, audiofile, animatedfile, outfile):
+def modify_lips(path_id, audiofile, animatedfile, outfilePath):
 	animatedfilePath = os.path.join("temp", path_id, animatedfile)
 	audiofilePath = os.path.join("temp", path_id, audiofile)
-	outfilePath = os.path.join("temp", path_id, outfile)
 	tempAudioPath = os.path.join("temp", path_id, "temp.wav")
 	tempVideoPath  = os.path.join("temp", path_id, "temp.avi")
 
@@ -175,8 +174,8 @@ def modify_lips(path_id, audiofile, animatedfile, outfile):
 	subprocess.call(command, shell=True)
 	
 
-	wav = audio.load_wav(tempAudioPath, 16000)
-	mel = audio.melspectrogram(wav)
+	wav = wav2lip.audio.load_wav(tempAudioPath, 16000)
+	mel = wav2lip.audio.melspectrogram(wav)
 	print(mel.shape)
 
 	if np.isnan(mel.reshape(-1)).sum() > 0:

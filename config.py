@@ -3,11 +3,11 @@ import time
 import os
 
 path_id = ""
-checkpoint_path="checkpoints/wav2lip_gan.pth"
+checkpoint_path="wav2lip/wav2lip_gan.pth"
 outfile="out.mp4"
 audiofile="tmp.wav"
 imgfile="avatar.png"
-driverfile="assets/driver06.mp4"
+driverfile="face_vid2vid/assets/driver06.mp4"
 animatedfile="animated.mp4"
 static=False
 fps=25

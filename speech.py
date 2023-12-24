@@ -2,7 +2,7 @@
 # from openai import OpenAI
 # import os
 
-# def generate_speech(voice, text):
+# def openai_generate_speech(audiofile, voice, text):
 # 	client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 # 	response = client.audio.speech.create(
 # 		model="tts-1",
@@ -19,9 +19,9 @@ import time
 from tortoise.api import TextToSpeech
 from tortoise.utils.audio import load_voices
 
-def generate_speech(path_id, outfile, voice, text):
+def generate_speech(path_id, outfile, voice, text, speed="standard"):
     tts = TextToSpeech(kv_cache=True, half=True)
-    pcm_audio = tts.tts_with_preset(text, preset='standard')
+    pcm_audio = tts.tts_with_preset(text, preset=speed)
     selected_voices = voice.split(',')
     for k, selected_voice in enumerate(selected_voices):
         if '&' in selected_voice:
@@ -47,3 +47,7 @@ if __name__ == '__main__':
     generate_speech(os.path.join("audio", str(int(time.time()))), "christmas.wav", "jl", 
                     "Merry Christmas! May the holiday bring you endless joy, laughter, \
                     and quality time with friends and family!")
+    
+    # openai_generate_speech("speech.mp3", "onyx", 
+    #                 "Merry Christmas! May the holiday bring you endless joy, laughter, \
+    #                 and quality time with friends and family!")    

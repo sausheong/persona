@@ -221,7 +221,7 @@ class FaceAnimationClass:
             file_id = "11ZgyjKI5OcB7klcsIdPpCCX38AIX8Soc"
             download(id=file_id, output=checkpoint_path, quiet=False)
         if use_sr:
-            from GPEN.face_enhancement import FaceEnhancement
+            from face_vid2vid.GPEN.face_enhancement import FaceEnhancement
 
             self.faceenhancer = FaceEnhancement(
                 size=256, model="GPEN-BFR-256", use_sr=False, sr_model="realesrnet_x2", channel_multiplier=1, narrow=0.5, use_facegan=True

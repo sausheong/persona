@@ -23,3 +23,11 @@ transformers
 accelerate
 mutagen
 humanize
+torchaudio
+progressbar
+p_tqdm
+git+https://github.com/sberbank-ai/Real-ESRGAN.git
+einops
+rotary_embedding_torch
+inflect
+unidecode
