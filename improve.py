@@ -16,6 +16,8 @@ from PIL import Image
 from RealESRGAN import RealESRGAN
 
 def vid2frames(vidPath, framesOutPath):
+    print(vidPath)
+    print(framesOutPath)
     vidcap = cv2.VideoCapture(vidPath)
     success,image = vidcap.read()
     frame = 1
@@ -30,6 +32,7 @@ def restore_frames(audiofilePath, videoOutPath, improveOutputPath):
     framesPath = improveOutputPath + "/%5d.png"
     fps = no_of_frames/audio_duration
     command = f"ffmpeg -y -r {fps} -f image2 -i {framesPath} -i {audiofilePath} -vcodec mpeg4 -b:v 20000k {videoOutPath}"
+    print(command)
     subprocess.call(command, shell=platform.system() != 'Windows')
 
 def get_audio_duration(audioPath):

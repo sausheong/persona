@@ -29,7 +29,7 @@ if __name__ == '__main__':
 	tstart = time.time()	
 
 	generate_images(os.path.join("image", path_id), "avatar.png", 
-				f"hyperrealistic digital avatar, centered, {args.prompt}, \
+				f"hyper-realistic digital avatar, centered, {args.prompt}, \
 				rim lighting, studio lighting, looking at the camera", args.times)
 
 	print("total time:", humanize.naturaldelta(dt.timedelta(seconds=int(time.time() - tstart))))	
