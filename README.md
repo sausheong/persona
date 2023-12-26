@@ -13,6 +13,9 @@ Tool for creating talking head videos using generative AI. Uses the following pr
 ## Santa Claus Christmas Greetings
 https://github.com/sausheong/persona/assets/5962/2d60798f-e877-46b1-90a0-afa864dab50e
 
+## Chinese New Year Greetings
+https://github.com/sausheong/persona/assets/5962/31ae4da6-3739-49aa-b4a7-5d20e6759795
+
 ## NORAD Tracking Santa
 https://github.com/sausheong/persona/assets/5962/c400edfd-7316-4d07-998f-9b94bf5c64af
 
@@ -24,4 +27,5 @@ https://github.com/sausheong/persona/assets/5962/575667e5-7946-4fd7-9eae-1192e79
 
 ## Apple closing its Infinite Loop retail store (2)
 https://github.com/sausheong/persona/assets/5962/68018299-a458-4f9f-8fa3-9640f910dfaf
+
 
