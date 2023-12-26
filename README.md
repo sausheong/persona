@@ -1,8 +1,7 @@
 # Persona
 
-Tool for creating digital avatars.
+Tool for creating talking head videos using generative AI. Uses the following projects/libraries:
 
-Assembles the following libraries to create digital avatars:
 1. [Tortoise-TTS](https://github.com/neonbjb/tortoise-tts) - generating speech
 2. [SDXL-Turbo](https://huggingface.co/stabilityai/sdxl-turbo) - generating the digital avatar image
 3. [One-Shot Free-View Neural Talking Head Synthesis](https://github.com/zhanglonghao1992/One-Shot_Free-View_Neural_Talking_Head_Synthesis) - animating the face
