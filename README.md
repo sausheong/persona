@@ -12,17 +12,5 @@ Assembles the following libraries to create digital avatars:
 # Examples
 
 ## Santa Claus Christmas Greetings
-https://github.com/sausheong/persona/assets/5962/2d60798f-e877-46b1-90a0-afa864dab50e
-
-## NORAD Tracking Santa
-https://github.com/sausheong/persona/assets/5962/c400edfd-7316-4d07-998f-9b94bf5c64af
-
-## Taking photos and videos
-https://github.com/sausheong/persona/assets/5962/1862f202-ec10-40e2-9ebc-83652945924e
-
-## Apple closing its Infinite Loop retail store
-https://github.com/sausheong/persona/assets/5962/575667e5-7946-4fd7-9eae-1192e79f7392
-
-## Apple closing its Infinite Loop retail store (2)
-https://github.com/sausheong/persona/assets/5962/68018299-a458-4f9f-8fa3-9640f910dfaf
+https://github.com/sausheong/persona/assets/5962/2d60798f-e877-46b1-90a0-afa864dab50e | https://github.com/sausheong/persona/assets/5962/c400edfd-7316-4d07-998f-9b94bf5c64af | https://github.com/sausheong/persona/assets/5962/1862f202-ec10-40e2-9ebc-83652945924e | https://github.com/sausheong/persona/assets/5962/575667e5-7946-4fd7-9eae-1192e79f7392 | https://github.com/sausheong/persona/assets/5962/68018299-a458-4f9f-8fa3-9640f910dfaf
 
